@@ -1,7 +1,7 @@
 package com.datapirate.springsecurity.security;
 
 import com.datapirate.springsecurity.auth.ApplicationUserService;
-import com.datapirate.springsecurity.jwt.JwrTokenVerifier;
+import com.datapirate.springsecurity.jwt.JwtTokenVerifier;
 import com.datapirate.springsecurity.jwt.JwtConfig;
 import com.datapirate.springsecurity.jwt.JwtUsernameAndPasswordAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +67,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig, secretKey))
-                .addFilterAfter(new JwrTokenVerifier(jwtConfig, secretKey), JwtUsernameAndPasswordAuthenticationFilter.class)
+                .addFilterAfter(new JwtTokenVerifier(jwtConfig, secretKey), JwtUsernameAndPasswordAuthenticationFilter.class)
 
                 .authorizeRequests()
 
